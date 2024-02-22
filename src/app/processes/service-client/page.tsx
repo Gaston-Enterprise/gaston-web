@@ -1,6 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
+// import * as React from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+
+const natureOfVisit = [
+  { id: 1, service: "Scheduled Maintenace" },
+  { id: 2, service: "Emergency Call" },
+];
 
 const page = () => {
   const [clientName, setClientName] = useState("");
@@ -26,58 +35,69 @@ const page = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" flex flex-col items-center my-12 container mx-auto py-5 bg-gray-200 rounded"
+      className=" flex flex-col my-12 container items-center mx-auto py-5 bg-gray-200 rounded"
     >
-      <div className="flex my-4 gap-5">
-        <label htmlFor="clientName">Client Name:</label>
-        <input
-          className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          type="text"
-          id="clientName"
-          value={clientName}
-          onChange={handleClientName}
-          required
-        />
-      </div>
-      <div className="grid my-4 grid-cols-2 gap-10 w-[450px]" >
-        <p className="py-4 px-2">Service check list:</p>
-        <div className="flex flex-col">
-          <label className="my-3">
-            <input type="checkbox" value="Task 1" onChange={handleTodoChange} />
-            <span className="ml-2" >Remove waste engine oil</span>
-          </label>
-          <label className="my-3">
-            <input type="checkbox" value="Task 2" onChange={handleTodoChange} />
-            <span className="ml-2" >Change oil & Fuel filter</span>
-            
-          </label>
-          <label className="my-3">
-            <input type="checkbox" value="Task 3" onChange={handleTodoChange} />
-            
-            <span className="ml-2" >Clean air filter</span>
-          </label>
-          <label className="my-3">
-            <input type="checkbox" value="Task 3" onChange={handleTodoChange} />
-            
-            <span className="ml-2" >Top up coolant & Engine oil if need be</span>
-          </label>
-          <label className="my-3">
-            <input type="checkbox" value="Task 3" onChange={handleTodoChange} />
-            
-            <span className="ml-2" >Tighten loose bolts</span>
-          </label>
+      <div className="" >
+
+        <div className="my-3" >
+          <TextField
+            required
+            size="small"
+            id="outlined-required"
+            label="Required"
+            defaultValue="Client Name"
+          />
         </div>
+
+        <div  className="my-3">
+          <TextField
+            size="small"
+            id="outlined-select-currency"
+            select
+            label="Select"
+            defaultValue="Scheduled Maintenace"
+            helperText="Nature of Visit"
+          >
+            {natureOfVisit.map((service) => (
+              <MenuItem key={service.id} value={service.id}>
+                {service.service}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
+        
+        <div className="my-3">Banner showing Information About Engine </div>
+        
+        <div className="my-3">
+          <TextField
+            id="outlined-textarea"
+            label="Problem Information"
+            placeholder="Example: Generator Service"
+            multiline
+            size="small"
+          />
+        </div>
+
+        <div className="my-3">
+          {" "}
+          <TextField
+            id="outlined-multiline-static"
+            label="Visitation information"
+            multiline
+            rows={4}
+            defaultValue="Work Done"
+            size="small"
+          />
+        </div>
+
+        <div> <TextField
+          id="outlined-textarea"
+          label="Recommendations"
+          placeholder="Placeholder"
+          multiline
+        /></div>
       </div>
-      <div className="my-4 flex gap-5 items-center">
-        <label htmlFor="otherStatements" className="text-center">Other Recommendations:</label>
-        <textarea
-          id="otherStatements"
-          className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          // value={otherStatements}
-          // onChange={handleOtherStatementsChange}
-        />
-      </div>
-      <button className="py-2 px-4 bg-indigo-600 text-white rounded hover:bg-indigo-700 focus:outline-none " type="submit">Submit</button>
+    
     </form>
   );
 };
