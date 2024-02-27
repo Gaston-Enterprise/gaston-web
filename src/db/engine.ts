@@ -1,43 +1,27 @@
 import mongoose, { Schema, model } from "mongoose";
+import { EngineType } from "@/types/types";
 
-interface Engine {
-  name: string;
-  serial_number: string;
-  rating: number;
-  Model: string;
-  parts: {
-    oilFilter: number;
-    fuelFilter: number;
-    airFilter: number;
-  };
-  location: string;
-  hourReading: number;
-  contacts?: {
-    phoneNumber: number;
-    email: string;
-  };
-  lastServicedDate: Date;
-  nextServiceDate: Date;
-}
-
-const engineSchema = new Schema<Engine>({
-  name: String,
+const engineSchema = new Schema<EngineType>({
+  _id: String,
   serial_number: String,
   rating: Number,
   Model: String,
   parts: {
     oilFilter: Number,
-    fuelFilter: Number,
+    fuelFilter: {
+      type: String,
+      enum: ["117", "145", "163", "201", "244", "492"]
+    },
     airFilter: Number,
   },
   location: String,
   hourReading: Number,
   contacts: {
-    phoneNumber: Number,
+    phoneNumber: String,
     email: String,
   },
   lastServicedDate: Date,
   nextServiceDate: Date,
 });
 
-export const Engine = model<Engine>("Engine", engineSchema);
+export const Engine = model<EngineType>("Engine", engineSchema);

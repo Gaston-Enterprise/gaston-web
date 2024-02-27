@@ -5,8 +5,8 @@ interface Service {
   customer_name: string;
   actions_performed: string[];
   recommendations: string;
-  hours_ran:number;
-  serviced_by:string[];
+  hours_ran: number;
+  serviced_by: string[];
   serviceDate: Date;
   nextServiceDate: Date;
 }
@@ -20,7 +20,7 @@ const serviceSchema = new Schema<Service>({
   actions_performed: [String],
   recommendations: String,
   hours_ran: Number,
-  serviced_by:[String],
+  serviced_by: [String],
   serviceDate: Date,
   nextServiceDate: Date,
 });
