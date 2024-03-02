@@ -1,5 +1,9 @@
 import mongoose, { Schema, model } from "mongoose";
-import { EngineType } from "@/types/types";
+import { EngineType } from "../types/types";
+// const model = require("mongoose")
+// const Schema = require("mongoose");
+// const  { Schema } = require("mongoose");
+// const { EngineType } = require("@/types/types");
 
 const engineSchema = new Schema<EngineType>({
   _id: String,
@@ -10,7 +14,7 @@ const engineSchema = new Schema<EngineType>({
     oilFilter: Number,
     fuelFilter: {
       type: String,
-      enum: ["117", "145", "163", "201", "244", "492"]
+      enum: ["117", "145", "163", "201", "244", "492"],
     },
     airFilter: Number,
   },
@@ -25,3 +29,5 @@ const engineSchema = new Schema<EngineType>({
 });
 
 export const Engine = model<EngineType>("Engine", engineSchema);
+
+// module.exports = { Engine };

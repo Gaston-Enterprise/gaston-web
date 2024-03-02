@@ -1,13 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-const Engine = require("../db/engine")
-const Service = require("../db/service")
-
+const Engine = require("../db/engine");
+const Service = require("../db/service");
 
 const app = express();
 
 const bodyParser = require("body-parser");
+const MONGO_URI = require("../utils/config");
 
 app.use(bodyParser.json());
 
