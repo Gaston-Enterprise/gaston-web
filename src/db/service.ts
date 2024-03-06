@@ -1,17 +1,7 @@
-import mongoose, { Schema, model } from "mongoose";
+import { Schema, model} from "mongoose";
+import { ServiceType } from "@/types/types";
 
-interface Service {
-  engine: mongoose.Types.ObjectId; // Reference to the engine document
-  customer_name: string;
-  actions_performed: string[];
-  recommendations: string;
-  hours_ran: number;
-  serviced_by: string[];
-  serviceDate: Date;
-  nextServiceDate: Date;
-}
-
-const serviceSchema = new Schema<Service>({
+const serviceSchema = new Schema<ServiceType>({
   engine: {
     type: Schema.Types.ObjectId,
     ref: "Engine",
@@ -25,4 +15,4 @@ const serviceSchema = new Schema<Service>({
   nextServiceDate: Date,
 });
 
-export const Service = model<Service>("Service", serviceSchema);
+export const Service = model<ServiceType>("Service", serviceSchema);
