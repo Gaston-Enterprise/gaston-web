@@ -1,9 +1,4 @@
-const { faker } = require("@faker-js/faker");
-const { MongoClient } = require("mongodb");
-const dotenv = require("dotenv").config();
-
-// import {faker} from "@faker-js/faker"
-// const getSavedEngines = require("./connection.js");
+const {faker } = require("@faker-js/faker")
 
 async function createRandomEngine() {
   return {
@@ -58,8 +53,9 @@ async function generateRandomEngines(count) {
 }
 
 async function createRandomClient(engines) {
+  // console.log(engines);
   return {
-    client_name: faker.Company.name(),
+    client_name: faker.company.name(),
     engine: faker.helpers.arrayElement(engines),
     contacts: {
       phoneNumber: faker.phone.number(),
@@ -86,32 +82,20 @@ async function createRandomClient(engines) {
 
 async function getSavedEngines(collection) {
   try {
-    const existingEngines = await collection.find();
+    const existingEngines = await collection.find({}).toArray();
     return existingEngines;
   } catch (error) {
     console.error(error);
   }
 }
 
-async function generateRandomClients(count) {
+async function generateRandomClients(count, engines) {
   const clients = [];
-
-  if (dotenv.error) {
-    throw dotenv.error;
-  }
-  console.log(dotenv.parsed);
-  const MONGO_URI = `${process.env.MONGO_DB_URI}${process.env.MONGO_DB_PASSWORD}${process.env.MONGO_CONFIGS}`;
-  console.log(MONGO_URI);
-  const user = new MongoClient(MONGO_URI);
-  await user.connect().then(console.log("Connected to Mongo db"));
-  const db = user.db("Gaston");
-  const engineColl = db.collection("Engines");
-  const existingEngines = await getSavedEngines(engineColl);
 
   for (let i = 0; i < count; i++) {
     try {
-      console.log("Generating"); 
-      const client = await createRandomClient(existingEngines);
+      console.log("Generating");
+      const client = await createRandomClient(engines);
       clients.push(client);
       console.log("Finished generating");
     } catch (error) {
@@ -132,5 +116,5 @@ async function main() {
   }
 }
 
-main();
-// module.exports = { generateRandomEngines, generateRandomClients };
+// main();
+module.exports = { generateRandomEngines, generateRandomClients };
