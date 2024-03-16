@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-// import * as React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios"
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,13 +9,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import MenuItem from "@mui/material/MenuItem";
 import {
-  FormControl,
-  FormControlLabel,
   FormGroup,
+  FormControlLabel,
   InputLabel,
-  Select,
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import EngineInformation from "@/components/EngineInformation";
@@ -32,6 +29,7 @@ const page = () => {
     nextServiceDate: null,
     servicedBy: [] as string[]
   });
+  const [engineInfo, setEngineInfo] = useState(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,6 +51,25 @@ const page = () => {
     
   };
 
+  const fetchEngineInformation = async () => {
+    try {
+      const response = await axios.get(`/api/engineInfo/?clientName=${form.clientName}`)
+      console.log(response.data);
+      
+      setEngineInfo(response.data)
+    } catch (error) {
+      console.error('Error fetching client information:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (form.clientName) {
+      fetchEngineInformation()
+    } else {
+      setEngineInfo(null)
+    }
+  }, [form.clientName])
+
   return (
     <form
     id="service-form"
@@ -70,13 +87,13 @@ const page = () => {
             value={form.clientName}
             onChange={(e) => setForm({ ...form, clientName: e.target.value })}
           />
-          <button type="submit">
+          <button type="submit" >
             <SearchIcon />
           </button>
         </div>
 
         <div className="my-3">
-          <EngineInformation />{" "}
+          <EngineInformation  />{" "}
         </div>
 
         <div className="flex flex-row gap-4 items-center">

@@ -1,6 +1,6 @@
 import React from "react";
 
-const EngineInformation = () => {
+const EngineInformation = (engineInfo) => {
   return (
     <>
       <div>Engine Information</div>
