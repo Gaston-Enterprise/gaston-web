@@ -27,4 +27,4 @@ const clientSchema = new Schema<ClientType>({
   },
 });
 
-export const Client = model<ClientType>("Client", clientSchema);
+export const Client = model<ClientType>("Client", clientSchema, "Clients");

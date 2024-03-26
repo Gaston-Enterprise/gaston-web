@@ -1,7 +1,10 @@
 import mongoose, { Schema, model } from "mongoose";
 import { EngineType } from "@/types/types";
 
-const engineSchema = new Schema<EngineType>({
+// const {Schema, model} = require("mongoose")
+// const {EngineType} = require("@/types/types")
+
+const engineSchema = new Schema<EngineType>({ 
   _id: String,
   serial_number: String,
   rating: Number,
@@ -24,4 +27,4 @@ const engineSchema = new Schema<EngineType>({
   nextServiceDate: Date,
 });
 
-export const Engine = model<EngineType>("Engine", engineSchema);
+export const Engine = model<EngineType>("Engine", engineSchema, "Engines");
