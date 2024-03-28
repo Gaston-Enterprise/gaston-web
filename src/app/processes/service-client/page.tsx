@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
+
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -77,21 +77,7 @@ const page = () => {
       className=" flex flex-col my-12 container items-center mx-auto py-5 bg-gray-200 rounded"
     >
       <div className=" max-w-fit">
-        <div className="my-3 flex items-center justify-around">
-          <TextField
-            // required
-            size="small"
-            id="Customer-Name"
-            label="Customer Name"
-            sx={{ fontSize: 20 }}
-            value={form.clientName}
-            onChange={(e) => setForm({ ...form, clientName: e.target.value })}
-          />
-          <button type="submit" >
-            <SearchIcon />
-          </button>
-        </div>
-
+        
         <div className="my-3">
           <EngineInformation  />{" "}
         </div>

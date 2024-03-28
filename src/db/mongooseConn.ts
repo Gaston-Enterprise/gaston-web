@@ -16,7 +16,7 @@ main().catch((err) => console.log(err));
 
 async function main() {
   try {
-    await mongoose.connect(MONGO_URI).then(async () => {
+    await mongoose.connect(MONGO_URI, {dbName: "Gaston"}).then(async () => {
       console.log("Connected to the database");
       const collections = await mongoose.connection.db
         .listCollections()
@@ -27,10 +27,10 @@ async function main() {
 
       // Log the collection names
       console.log("Collections:", collectionNames);
-      const clients = await Client.find({}).exec();
-      const engs = await Engine.find({}).exec();
-      console.log(clients);
-      console.log(engs);
+      const client = await Client.findOne({client_name: "Johnson LLC"}).exec();
+      // const engs = await Engine.find({}).exec();
+      console.log("Client found is %s ", client);
+      // console.log(engs);
     });
     //   const enginesFromDb = await Client.findOne({client_name:"Johnson LLC"})
   } catch (error) {

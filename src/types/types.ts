@@ -55,3 +55,20 @@ export type ClientType = {
   payment_statement: ClientPaymentStatement[];
   services:ServiceType;
 }
+
+export type ClientDataType = {
+  client_name: string;
+  engine: EngineType;
+  contacts?: ContactInfo;
+  payment_statement: ClientPaymentStatement[];
+  services:ServiceType;
+}
+
+export type engineDataType = {
+  engineSerialNo: string;
+  engRating:number;
+  engModel:string;
+  lastHourValue: Date;
+  lastServiceDate: Date;
+  engLocation:string;
+}
